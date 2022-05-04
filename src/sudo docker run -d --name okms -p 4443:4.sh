@@ -1,0 +1,1 @@
+sudo docker run -d --name okms -p 4443:4443 -e OPENVIDU_SECRET=MY_SECRET -e OPENVIDU_STREAMS_ALLOW_TRANSCODING=false --mount type=bind,src="$PWD/kurento-files/",dst=/etc/kurento/ openvidu/openvidu-server-kms:2.21.0
