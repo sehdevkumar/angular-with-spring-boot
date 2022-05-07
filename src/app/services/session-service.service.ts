@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SessionService {
-  OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443';
+  OPENVIDU_SERVER_URL = 'https://' + '172.17.0.1' + ':4443';
   OPENVIDU_SERVER_SECRET = 'MY_SECRET';
   sessionObject: SessionObject | undefined;
   tokenCollection: Array<TokenConnection> = [];
@@ -29,26 +29,6 @@ export class SessionService {
         this.tokenCollectionDispatch.next(this.tokenCollection);
       });
     });
-  }
-
-  public getPublishedCamerasAndCreateSession(): void {
-    let param = new HttpParams();
-    param = param.append('credentials', 'PASSWORD');
-    this.htttpClient
-      .request('get', 'https://localhost:8088/', {
-        params: param,
-      })
-      .pipe(
-        catchError((error) => {
-          this.cameraPublishNotification.next(true);
-          console.warn(error, 'publish');
-          return observableThrowError(error);
-        })
-      )
-      .subscribe((response) => {
-        console.warn(response, 'Published');
-        this.cameraPublishNotification.next(true);
-      });
   }
 
   private getAllSessionFromServer(): Promise<any> {

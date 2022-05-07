@@ -15,8 +15,4 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
   ngAfterViewInit(): void {}
   ngOnInit(): void {}
-
-  public onClickedPublishCamera(): void {
-    this.sessionService.getPublishedCamerasAndCreateSession();
-  }
 }
